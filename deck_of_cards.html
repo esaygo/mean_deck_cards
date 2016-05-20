@@ -1,0 +1,89 @@
+<script>
+
+// Create a Deck object constructor. A deck should have the following functionality:
+
+// The Deck should contain the 52 standard cards
+// The Deck should be able to shuffle
+// The Deck should be able to reset
+// The Deck should be able to deal a random card
+// Deal should return the card that was dealt and remove it from the deck
+
+
+function Deck() {
+    this.numbers = [2,3,4,5,6,7,8,9,10,"Ace","Jack","Queen","King"],
+    this.suits = ["Hearts", "Spades", "Clubs", "Dimonds"],
+    this.deck = [];
+    this.buildDeck = function(){
+      for(var i = 0; i < this.suits.length; i++) {
+        for(var j = 0; j < this.numbers.length; j++) {
+            this.deck.push(this.numbers[j]+this.suits[i]);
+        }
+      }
+      return this.deck;
+    }
+    //Fisher-Yates algorithm
+    this.shuffle = function() {
+      var currentIndex = this.deck.length;
+      var temporaryValue;
+      var randomIndex;
+
+      while (currentIndex != 0) {
+        randomIndex = Math.floor(Math.random() * currentIndex);
+        currentIndex -= 1;
+        temporaryValue = this.deck[currentIndex];
+        this.deck[currentIndex] = this.deck[randomIndex];
+        this.deck[randomIndex] = temporaryValue;
+      }
+      return this;
+    }
+    this.deal = function() {
+      var dealt_card="";
+      if(this.deck.length > 0){
+        var randCard = Math.floor(Math.random() * this.deck.length);
+        dealt_card = this.deck.splice(this.deck[randCard],1);
+        console.log(dealt_card);
+      }
+
+      return this;
+    }
+}
+
+var deck = new Deck;
+console.log(deck.buildDeck());
+//console.log(deck.shuffle());
+console.log(deck.shuffle());
+deck.deal();
+
+// Now create a Player object constructor. A Player should have the following functionality:
+
+// The Player should have a name
+// The Player should have a hand
+// The Player should be able to take a card (use the deck.deal method)
+// The Player should be able to discard a card
+
+
+
+
+
+// var cards = deck.deck;
+//
+// function shuffle() {
+//   var currentIndex = cards.length;
+//   var temporaryValue;
+//   var randomIndex;
+//
+//   while (currentIndex != 0) {
+//     randomIndex = Math.floor(Math.random() * currentIndex);
+//     currentIndex -= 1;
+//     //console.log(randomIndex);
+//     temporaryValue = cards[currentIndex];
+//     cards[currentIndex] = cards[randomIndex];
+//     cards[randomIndex] = temporaryValue;
+//   }
+//   return console.log(cards);
+// }
+// shuffle();
+
+
+
+</script>
